@@ -1,0 +1,23 @@
+.info__subtitle {
+  margin: 0;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+}
+@media screen and (max-width:702px){
+  .info__subtitle{
+    align-items: center;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 320px){
+  .info__subtitle{
+   
+font-size: 14px;
+line-height: 17px;
+text-align: center;
+  }
+}

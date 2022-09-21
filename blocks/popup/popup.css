@@ -1,0 +1,24 @@
+.popup {
+    background: #fff;
+    border-radius: 20px;
+    padding: 34px 36px 37px 36px;
+    width: 358px;
+    height: 259px;
+    position: absolute;
+    top: 365px;
+    left: 50%;
+    z-index: 51;
+    transform: translate(-50%, -50%);
+}
+@media screen and ( max-width:522px){
+    .popup {
+        width: 238px;
+        height: 270px;
+        padding: 25px 22px 25px 22px;
+        
+  }
+  @media screen and ( max-width:320px){
+    .popup {
+        top: 282px; 
+    }
+  }

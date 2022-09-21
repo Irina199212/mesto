@@ -1,12 +1,148 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document111</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Document</title>
+  </head>
+  <body class="body">
+    <div class="page">
+      <div class="header">
+        <div class="logo">
+          <a href="./"
+            ><img src="./images/logo.svg" class="logo__image" alt="лого"
+          /></a>
+        </div>
+      </div>
+
+      <div class="main">
+        <section class="profile">
+          <div class="avatar">
+            <img src="./images/Avatar.png" class="avatar__image" alt="аватар" />
+          </div>
+          <div class="info">
+            <h2 class="info__title">Жак-Ив Кусто</h2>
+            <button class="info__button"></button>
+            <p class="info__subtitle">Исследователь океана</p>
+          </div>
+          <button class="button" type="button"></button>
+        </section>
+        <section class="elements">
+          <div class="element">
+            <img
+              src="./images/karachaevsk.png"
+              class="element__image"
+              alt="Карачаевск"
+            />
+            <div class="element__body">
+              <div class="group">
+                <p class="element__text">Карачаевск</p>
+                <button class="element__button"></button>
+              </div>
+            </div>
+          </div>
+          <div class="element">
+            <img
+              src="./images/elbrus.png"
+              class="element__image"
+              alt="Карачаевск"
+            />
+            <div class="element__body">
+              <div class="group">
+                <p class="element__text">Гора Эльбрус</p>
+                <button class="element__button"></button>
+              </div>
+            </div>
+          </div>
+          <div class="element">
+            <img
+              src="./images/Donbai.png"
+              class="element__image"
+              alt="Карачаевск"
+            />
+            <div class="element__body">
+              <div class="group">
+                <p class="element__text">Домбай</p>
+                <button class="element__button"></button>
+              </div>
+            </div>
+          </div>
+          <div class="element">
+            <img
+              src="./images/elbrus.png"
+              class="element__image"
+              alt="Карачаевск"
+            />
+            <div class="element__body">
+              <div class="group">
+                <p class="element__text">Гора Эльбрус</p>
+                <button class="element__button"></button>
+              </div>
+            </div>
+          </div>
+          <div class="element">
+            <img
+              src="./images/Donbai.png"
+              class="element__image"
+              alt="Карачаевск"
+            />
+            <div class="element__body">
+              <div class="group">
+                <p class="element__text">Домбай</p>
+                <button class="element__button"></button>
+              </div>
+            </div>
+          </div>
+          <div class="element">
+            <img
+              src="./images/karachaevsk.png"
+              class="element__image"
+              alt="Карачаевск"
+            />
+            <div class="element__body">
+              <div class="group">
+                <p class="element__text">Карачаевск</p>
+                <button class="element__button"></button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="footer">
+        <p class="footer__text">&copy;2020 Mesto Russia</p>
+      </div>
+    </div>
+    <div class="overlay"></div>
+    <div class="popup">
+      <div class="popup__close"></div>
+      <form class="form" action="" method="post">
+        <legend class="form__title">Редактировать профиль</legend>
+        <fieldset class="fieldset">
+          <div class="form__row">
+            <input
+              type="text"
+              name="name"
+              id="text"
+              class="form__text"
+              placeholder="Жак-Ив Кусто"
+            />
+          </div>
+          <div class="form__row">
+            <input
+              type="text"
+              name="post"
+              id="text1"
+              class="form__text"
+              placeholder="Исследователь океана"
+            />
+          </div>
+        </fieldset>
+        <button type="submit" class="form__button">
+          <p class="form__button_text">Сохранить</p>
+        </button>
+      </form>
+    </div>
+  </body>
 </html>

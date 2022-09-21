@@ -1,0 +1,18 @@
+.info__button {
+  background: transparent url(../../../images/Vector.svg) no-repeat center
+    center;
+  border: white solid 1px;
+  width: 24px;
+  height: 24px;
+}
+
+
+@media screen and (max-width: 320px){
+  .info__button{
+    width: 18px;
+    height: 18px;
+  }
+}
+.info__button:hover {
+opacity: 0.6;
+}

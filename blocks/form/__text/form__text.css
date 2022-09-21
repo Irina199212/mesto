@@ -1,0 +1,16 @@
+.form__text {
+  padding-bottom: 13px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+.form__text:focus {
+    outline: none;
+}
