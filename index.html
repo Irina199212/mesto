@@ -23,7 +23,7 @@
             <img src="./images/Avatar.png" class="avatar__image" alt="аватар" />
           </div>
           <div class="info">
-            <h2 class="info__title">Жак-Ив Кусто</h2>
+            <h2 class="info__title">Жак-Ив Кусто12312312</h2>
             <button class="info__button"></button>
             <p class="info__subtitle">Исследователь океана</p>
           </div>
@@ -114,35 +114,36 @@
         <p class="footer__text">&copy;2020 Mesto Russia</p>
       </div>
     </div>
-    <div class="overlay"></div>
+
     <div class="popup">
-      <div class="popup__close"></div>
-      <form class="form" action="" method="post">
-        <legend class="form__title">Редактировать профиль</legend>
-        <fieldset class="fieldset">
-          <div class="form__row">
-            <input
-              type="text"
-              name="name"
-              id="text"
-              class="form__text"
-              placeholder="Жак-Ив Кусто"
-            />
-          </div>
-          <div class="form__row">
-            <input
-              type="text"
-              name="post"
-              id="text1"
-              class="form__text"
-              placeholder="Исследователь океана"
-            />
-          </div>
-        </fieldset>
-        <button type="submit" class="form__button">
-          <p class="form__button_text">Сохранить</p>
-        </button>
-      </form>
+      <div class="popup__container">
+        <div class="popup__close"></div>
+        <form class="form" action="" method="post">
+          <legend class="form__title">Редактировать профиль</legend>
+          <fieldset class="fieldset">
+            <div class="form__row">
+              <input
+                type="text"
+                name="name"
+                id="nameForm"
+                class="form__text"
+                value="Жак-Ив Кусто111"
+              />
+            </div>
+            <div class="form__row">
+              <input
+                type="text"
+                name="post"
+                id="jobForm"
+                class="form__text"
+                value="Исследователь океана1111"
+              />
+            </div>
+          </fieldset>
+          <button type="submit" class="form__button">Сохранить</button>
+        </form>
+      </div>
     </div>
   </body>
+  <script src="./index.js"></script>
 </html>
