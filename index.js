@@ -8,9 +8,8 @@ const jobInput = document.querySelector("#jobForm");
 const nameTitle = document.querySelector(".info__title");
 const jobTitle = document.querySelector(".info__subtitle");
 
-nameInput.value=nameTitle.textContent
-jobInput.value=jobTitle.textContent
-
+nameInput.value = nameTitle.textContent;
+jobInput.value = jobTitle.textContent;
 
 function popupToggle() {
   pupup.classList.toggle("popup_opened");
