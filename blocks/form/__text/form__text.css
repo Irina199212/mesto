@@ -1,5 +1,5 @@
 .form__text {
-  padding:0 0 13px;
+  padding: 0 0 13px;
   border: none;
   width: 100%;
   font-family: "Inter";
@@ -9,7 +9,6 @@
   line-height: 17px;
   color: #000000;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-}
-.form__text:focus {
-    outline: none;
+  margin-bottom: 30px;
+  outline: none;
 }

@@ -5,15 +5,16 @@
   width: 24px;
   height: 24px;
   cursor: pointer;
+  padding: 0;
 }
 
+.info__button:hover {
+  opacity: 0.6;
+}
 
-@media screen and (max-width: 320px){
-  .info__button{
+@media screen and (max-width: 918px) {
+  .info__button {
     width: 18px;
     height: 18px;
   }
-}
-.info__button:hover {
-opacity: 0.6;
 }

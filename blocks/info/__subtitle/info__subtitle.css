@@ -6,18 +6,16 @@
   font-size: 18px;
   line-height: 22px;
   color: #ffffff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 336px;
 }
-@media screen and (max-width:702px){
-  .info__subtitle{
-    align-items: center;
-    margin: 0 auto;
-  }
-}
-@media screen and (max-width: 320px){
-  .info__subtitle{
-   
-font-size: 14px;
-line-height: 17px;
-text-align: center;
+@media screen and (max-width: 918px) {
+  .info__subtitle {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    max-width: 282px;
   }
 }

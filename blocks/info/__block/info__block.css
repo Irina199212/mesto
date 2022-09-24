@@ -1,0 +1,16 @@
+.info__block {
+  display: grid;
+  grid-template-columns: max-content max-content;
+  gap: 18px;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+@media screen and (max-width: 918px) {
+  .info__block {
+    grid-template-columns: max-content max-content;
+    gap: 10px;
+    margin-bottom: 14px;
+    max-width: 282px;
+  }
+}

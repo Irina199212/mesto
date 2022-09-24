@@ -7,9 +7,9 @@
   line-height: 29px;
   color: #000000;
 }
-@media screen and (max-width: 522px) {
+@media screen and (max-width: 918px) {
   .form__title {
-    margin-bottom: 74px;
+    margin-bottom: 75px;
     font-size: 18px;
     line-height: 22px;
   }

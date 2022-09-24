@@ -1,11 +1,7 @@
 .info {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 336px;
-  align-items: baseline;
+  display: grid;
 }
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 918px) {
   .info {
     justify-content: center;
   }

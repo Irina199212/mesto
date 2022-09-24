@@ -2,18 +2,12 @@
   margin: 0 auto 53px;
   display: grid;
   gap: 30px;
-  grid-template-columns: min-content 1fr min-content;
+  grid-template-columns: max-content 1fr max-content;
   align-items: center;
 }
-@media screen and (max-width: 702px) {
+@media screen and (max-width: 918px) {
   .profile {
-    margin: 0 auto 36px;
-    display: flex;
-    flex-direction: column;
-  }
-}
-@media screen and (max-width: 320px) {
-  .profile {
-    max-width: 282px;
+    grid-template-columns: 1fr;
+    justify-items: center;
   }
 }

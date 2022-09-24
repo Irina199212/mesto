@@ -1,5 +1,5 @@
 .info__title {
-  margin: 0 18px 16px 0;
+  margin: 0;
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
@@ -9,22 +9,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 336px;
 }
-@media screen and (max-width: 664px) {
+@media screen and (max-width: 918px) {
   .info__title {
     text-align: center;
     margin: 0 auto;
-  }
-}
-@media screen and (max-width: 360px) {
-  .info__title {
     font-size: 27px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .info__title {
-    margin:0 10px 14px;
     line-height: 33px;
+    max-width: 254px;
   }
 }

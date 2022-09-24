@@ -2,15 +2,15 @@
   max-width: 142px;
   max-height: 33px;
 }
-@media screen and (max-width: 934px) {
-  .logo {
-    margin: 0 27px;
-  }
+
+.logo:hover {
+  opacity: 0.6;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 918px) {
   .logo {
     max-width: 103.74px;
     max-height: 24.4px;
+    margin: 0 27px;
   }
 }
