@@ -11,6 +11,7 @@
   overflow: hidden;
   max-width: 336px;
 }
+
 @media screen and (max-width: 918px) {
   .info__title {
     text-align: center;
