@@ -1,5 +1,5 @@
-.info__button {
-  background: transparent url('../../../images/Vector.svg') no-repeat center
+.profile__button-edit {
+  background: transparent url("../../../images/Vector.svg") no-repeat center
     center;
   border: white solid 1px;
   width: 24px;
@@ -7,11 +7,11 @@
   cursor: pointer;
   padding: 0;
 }
-.info__button:hover {
+.profile__button-edit:hover {
   opacity: 0.6;
 }
 @media screen and (max-width: 918px) {
-  .info__button {
+  .profile__button-edit {
     width: 18px;
     height: 18px;
   }

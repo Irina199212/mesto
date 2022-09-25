@@ -1,10 +1,10 @@
-.info__subtitle {
+.profile__title {
   margin: 0;
   font-family: "Inter";
   font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
   color: #ffffff;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -13,10 +13,11 @@
 }
 
 @media screen and (max-width: 918px) {
-  .info__subtitle {
-    font-size: 14px;
-    line-height: 17px;
+  .profile__title {
     text-align: center;
-    max-width: 282px;
+    margin: 0 auto;
+    font-size: 27px;
+    line-height: 33px;
+    max-width: 254px;
   }
 }

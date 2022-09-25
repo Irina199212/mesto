@@ -1,8 +1,8 @@
-.info {
+.profile__info {
   display: grid;
 }
 @media screen and (max-width: 918px) {
-  .info {
+  .profile__info {
     justify-content: center;
   }
 }

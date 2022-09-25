@@ -1,4 +1,4 @@
-.info__block {
+.profile__block {
   display: grid;
   grid-template-columns: max-content max-content;
   gap: 18px;
@@ -7,10 +7,10 @@
 }
 
 @media screen and (max-width: 918px) {
-  .info__block {
-    grid-template-columns: max-content max-content;
+  .profile__block {
     gap: 10px;
     margin-bottom: 14px;
     max-width: 282px;
+    justify-content: center;
   }
 }

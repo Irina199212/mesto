@@ -14,5 +14,5 @@
     center center;
 }
 .element__button:hover {
-  opacity: 0.6;
+  opacity: 0.5;
 }
