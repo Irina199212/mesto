@@ -1,5 +1,5 @@
 .profile {
-  margin: 0 auto 36px;
+  margin: 0 auto 47.75px;
   display: grid;
   gap: 30px;
   grid-template-columns: max-content 1fr max-content;
@@ -9,5 +9,6 @@
   .profile {
     grid-template-columns: 1fr;
     justify-items: center;
+    margin-bottom: 36px;
   }
 }
