@@ -1,13 +1,11 @@
 .popups__container {
-    
-position: absolute;
-align-items: center;
-justify-content: center;
-
+  position: absolute;
+  align-items: center;
+  justify-content: center;
 }
-@media screen and (max-width:644px) {
-    .popups__container{ 
-margin-left: 40px;
-margin-right: 40px;
-    }
+@media screen and (max-width: 644px) {
+  .popups__container {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
 }
