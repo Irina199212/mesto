@@ -1,5 +1,5 @@
 .element__button {
-  background: transparent url('../../../images/button.svg') no-repeat center
+  background: transparent url("../../../images/button.svg") no-repeat center
     center;
   width: 22px;
   height: 19px;
@@ -10,7 +10,7 @@
 }
 .element__button:active {
   opacity: 1;
-  background: transparent url('../../../images/button_active.svg') no-repeat
+  background: transparent url("../../../images/button_active.svg") no-repeat
     center center;
 }
 .element__button:hover {
