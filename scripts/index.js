@@ -1,55 +1,35 @@
-const popup = document.querySelector(".popup");
-const popupContainer = popup.querySelector(".popup__container");
-const popupCloseButton = popup.querySelector(".popup__close");
-
-const popupImage = document.querySelector(".popups");
-const popupImageContainer = popupImage.querySelector(".popups__container");
-const popupImageCloseButton = popupImage.querySelector(".popups__close");
+const nameTitle = document.querySelector(".profile__title");
+const jobTitle = document.querySelector(".profile__subtitle");
 
 const cards = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#card").content;
 
-const addCardButton = document.querySelector(".profile__button-add");
-const editeProfileButton = document.querySelector(".profile__button-edit");
+const buttonOpenPopupCard = document.querySelector(".profile__button-add");
+const buttonOpenPopupProfile = document.querySelector(".profile__button-edit");
 
-const nameTitle = document.querySelector(".profile__title");
-const jobTitle = document.querySelector(".profile__subtitle");
+const profilePopup = document.querySelector(".popup_profile-form");
+const profileForm = profilePopup.querySelector("form[name='profile-form']");
+const buttonClosePopupProfile = profilePopup.querySelector(".popup__close");
+const inputNameProfileForm = profileForm.querySelector(".form__text_name_name");
+const inputJobProfileForm = profileForm.querySelector(".form__text_name_post");
 
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+const cardPopup = document.querySelector(".popup_add-card");
+const cardForm = cardPopup.querySelector("form[name='add-card-form']");
+const buttonClosePopupCard = cardPopup.querySelector(".popup__close");
+const inputTitleCardForm = cardForm.querySelector(".form__text_name_name");
+const inputLinkCardForm = cardForm.querySelector(".form__text_name_link");
 
-const openPopup = () => {
+const popupImage = document.querySelector(".popup_image");
+const buttonClosePopupImage = popupImage.querySelector(".popup__close");
+const popupPicture = popupImage.querySelector(".popup__image");
+const popupCaption = popupImage.querySelector(".popup__text");
+
+const openPopup = (popup) => {
   popup.classList.add("popup_opened");
 };
 
-const closePopup = () => {
+const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
-  const popupForm = popupContainer.querySelector("form");
-  popupForm.remove();
 };
 
 const render = () => {
@@ -57,74 +37,52 @@ const render = () => {
     cards.append(createCard(item));
   });
 
-  addCardButton.addEventListener("click", addCardPopupHandler);
-  editeProfileButton.addEventListener("click", editeProfilePopupHandler);
-  popupCloseButton.addEventListener("click", closePopup);
+  buttonOpenPopupCard.addEventListener("click", addCardPopupHandler);
+  buttonOpenPopupProfile.addEventListener("click", profilePopupHandler);
 
+  cardForm.addEventListener("submit", addCardPopupFormSubmitHandler);
+  profileForm.addEventListener("submit", profileFormSubmitHandler);
 
-  popupImageCloseButton.addEventListener("click", closeImage);
+  buttonClosePopupProfile.addEventListener("click", closePopupProfileHandler);
+  buttonClosePopupCard.addEventListener("click", closePopupCardHandler);
+
+  buttonClosePopupImage.addEventListener("click", closeImage);
 };
 
-const editeProfilePopupHandler = () => {
-  const editeProfilePopupFormTemplate =
-    document.querySelector("#profile-form").content;
-  const editeProfilePopupForm = editeProfilePopupFormTemplate
-    .querySelector("form")
-    .cloneNode(true);
-
-  editeProfilePopupForm.querySelector(".form__text_name_name").value =
-    nameTitle.textContent;
-  editeProfilePopupForm.querySelector(".form__text_name_post").value =
-    jobTitle.textContent;
-
-  editeProfilePopupForm.addEventListener(
-    "submit",
-    editeProfileFormSubmitHandler
-  );
-
-  popupContainer.append(editeProfilePopupForm);
-  openPopup();
+const likeHandler = (evt) => {
+  evt.target.classList.toggle("element__button_active");
 };
 
-const editeProfileFormSubmitHandler = (evt) => {
-  evt.preventDefault();
-  const currentForm = evt.target.closest("form");
-  nameTitle.textContent = currentForm.querySelector(
-    ".form__text_name_name"
-  ).value;
-  jobTitle.textContent = currentForm.querySelector(
-    ".form__text_name_post"
-  ).value;
-
-  closePopup();
+const deleteHandler = (evt) => {
+  const currentCard = evt.target.closest(".element");
+  currentCard.remove();
 };
 
 const addCardPopupHandler = () => {
-  const addCardPopupFormTemplate = document.querySelector("#add-card").content;
-  const addCardPopupForm = addCardPopupFormTemplate
-    .querySelector("form")
-    .cloneNode(true);
-  addCardPopupForm.querySelector(".form__text_name_name").value = "";
-  addCardPopupForm.querySelector(".form__text_name_link").value = "";
-
-  addCardPopupForm.addEventListener("submit", addCardPopupFormSubmitHandler);
-
-  popupContainer.append(addCardPopupForm);
-  openPopup();
+  inputTitleCardForm.value = "";
+  inputLinkCardForm.value = "";
+  openPopup(cardPopup);
+};
+const closePopupCardHandler = () => {
+  inputTitleCardForm.value = "";
+  inputLinkCardForm.value = "";
+  closePopup(cardPopup);
 };
 
 const addCardPopupFormSubmitHandler = (evt) => {
   evt.preventDefault();
-  const currentForm = evt.target.closest("form");
-
   const item = {
-    name: currentForm.querySelector(".form__text_name_name").value,
-    link: currentForm.querySelector(".form__text_name_link").value,
+    name: inputTitleCardForm.value,
+    link: inputLinkCardForm.value,
   };
-
   cards.append(createCard(item));
+  closePopup(cardPopup);
+};
 
-  closePopup();
+const closePopupProfileHandler = () => {
+  inputNameProfileForm.value = "";
+  inputJobProfileForm.value = "";
+  closePopup(profilePopup);
 };
 
 const createCard = (item) => {
@@ -147,45 +105,38 @@ const createCard = (item) => {
   return cardElement;
 };
 
+const profileFormSubmitHandler = (evt) => {
+  evt.preventDefault();
+  nameTitle.textContent = inputNameProfileForm.value;
+  jobTitle.textContent = inputJobProfileForm.value;
+  closePopup(profilePopup);
+};
+
+const profilePopupHandler = () => {
+  inputNameProfileForm.value = nameTitle.textContent;
+  inputJobProfileForm.value = jobTitle.textContent;
+  openPopup(profilePopup);
+};
+
 const openImage = () => {
   popupImage.classList.add("popups_active");
 };
 
 const closeImage = () => {
-  popupImage.classList.remove("popups_active");
-  const image = popupImageContainer.querySelector(".figure");
-  image.remove();
+  popupPicture.src = "./";
+  popupPicture.alt = "...";
+  popupCaption.textContent = "...";
+  closePopup(popupImage);
 };
 
 const openImageHandler = (evt) => {
   evt.preventDefault();
   const current = evt.target;
-  const showImagePopupTemplate = document.querySelector("#image-form").content;
-  const showImagePopup = showImagePopupTemplate
-    .querySelector(".figure")
-    .cloneNode(true);
 
-  showImagePopup.querySelector(".popups__images").src = current.src;
-  showImagePopup.querySelector(".popups__images").alt = current.alt;
-  showImagePopup.querySelector(".popups__text").textContent = current.alt;
-
-  popupImageContainer.append(showImagePopup);
-
-  openImage();
-};
-
-const likeHandler = (evt) => {
-  const current = evt.target;
-  if (current.classList.contains("element__button_active")) {
-    current.classList.remove("element__button_active");
-  } else {
-    current.classList.add("element__button_active");
-  }
-};
-
-const deleteHandler = (evt) => {
-  const currentCard = evt.target.closest(".element");
-  currentCard.remove();
+  popupPicture.src = current.src;
+  popupPicture.alt = current.alt;
+  popupCaption.textContent = current.alt;
+  openPopup(popupImage);
 };
 
 render();
