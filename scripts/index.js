@@ -64,8 +64,6 @@ const addCardPopupHandler = () => {
   openPopup(cardPopup);
 };
 const closePopupCardHandler = () => {
-  inputTitleCardForm.value = "";
-  inputLinkCardForm.value = "";
   closePopup(cardPopup);
 };
 
@@ -75,13 +73,11 @@ const addCardPopupFormSubmitHandler = (evt) => {
     name: inputTitleCardForm.value,
     link: inputLinkCardForm.value,
   };
-  cards.append(createCard(item));
+  cards.prepend(createCard(item));
   closePopup(cardPopup);
 };
 
 const closePopupProfileHandler = () => {
-  inputNameProfileForm.value = "";
-  inputJobProfileForm.value = "";
   closePopup(profilePopup);
 };
 
