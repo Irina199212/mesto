@@ -12,12 +12,14 @@ const profileForm = profilePopup.querySelector("form[name='profile-form']");
 const buttonClosePopupProfile = profilePopup.querySelector(".popup__close");
 const inputNameProfileForm = profileForm.querySelector(".form__text_name_name");
 const inputJobProfileForm = profileForm.querySelector(".form__text_name_post");
+const buttonSubmitProfileForm = profileForm.querySelector(".form__button");
 
 const cardPopup = document.querySelector(".popup_add-card");
 const cardForm = cardPopup.querySelector("form[name='add-card-form']");
 const buttonClosePopupCard = cardPopup.querySelector(".popup__close");
 const inputTitleCardForm = cardForm.querySelector(".form__text_name_name");
 const inputLinkCardForm = cardForm.querySelector(".form__text_name_link");
+const buttonSubmitCardForm = cardForm.querySelector(".form__button");
 
 const popupImage = document.querySelector(".popup_image");
 const buttonClosePopupImage = popupImage.querySelector(".popup__close");
@@ -32,6 +34,20 @@ const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
 };
 
+const closePopupHandler = (event) => {
+  if (event.keyCode == 27) {
+    closePopup(profilePopup);
+    closePopup(cardPopup);
+    closePopup(popupImage);
+  }
+};
+
+const overlayHandler = (evt) => {
+  if (evt.target.classList.contains("popup_opened")) {
+    closePopup(evt.target);
+  }
+};
+
 const render = () => {
   initialCards.forEach((item) => {
     cards.append(createCard(item));
@@ -42,6 +58,19 @@ const render = () => {
 
   cardForm.addEventListener("submit", addCardPopupFormSubmitHandler);
   profileForm.addEventListener("submit", profileFormSubmitHandler);
+  document.addEventListener("keydown", closePopupHandler);
+
+  profilePopup.addEventListener("click", overlayHandler);
+  cardPopup.addEventListener("click", overlayHandler);
+  popupImage.addEventListener("click", overlayHandler);
+
+  enableValidation({
+    formSelector: "form[name='profile-form']",
+  });
+
+  enableValidation({
+    formSelector: "form[name='add-card-form']",
+  });
 
   buttonClosePopupProfile.addEventListener("click", closePopupProfileHandler);
   buttonClosePopupCard.addEventListener("click", closePopupCardHandler);
@@ -59,8 +88,7 @@ const deleteHandler = (evt) => {
 };
 
 const addCardPopupHandler = () => {
-  inputTitleCardForm.value = "";
-  inputLinkCardForm.value = "";
+  cardForm.reset();
   openPopup(cardPopup);
 };
 const closePopupCardHandler = () => {
