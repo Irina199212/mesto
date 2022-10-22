@@ -64,18 +64,12 @@ const render = () => {
   cardPopup.addEventListener("click", overlayHandler);
   popupImage.addEventListener("click", overlayHandler);
 
-  enableValidation({
-    formSelector: "form[name='profile-form']",
-  });
-
-  enableValidation({
-    formSelector: "form[name='add-card-form']",
-  });
-
   buttonClosePopupProfile.addEventListener("click", closePopupProfileHandler);
   buttonClosePopupCard.addEventListener("click", closePopupCardHandler);
 
   buttonClosePopupImage.addEventListener("click", closeImage);
+
+  
 };
 
 const likeHandler = (evt) => {
@@ -89,6 +83,13 @@ const deleteHandler = (evt) => {
 
 const addCardPopupHandler = () => {
   cardForm.reset();
+  enableValidation({
+    formSelector: "form[name='add-card-form']",
+    inputSelector: ".form__text",
+    submitButtonSelector: ".form__button",
+    inputErrorClass: "form__text_error",
+    errorClass: "error_open",
+  });
   openPopup(cardPopup);
 };
 const closePopupCardHandler = () => {
@@ -96,7 +97,8 @@ const closePopupCardHandler = () => {
 };
 
 const addCardPopupFormSubmitHandler = (evt) => {
-  evt.preventDefault();
+  evt.preventDefault()
+
   const item = {
     name: inputTitleCardForm.value,
     link: inputLinkCardForm.value,
@@ -139,6 +141,15 @@ const profileFormSubmitHandler = (evt) => {
 const profilePopupHandler = () => {
   inputNameProfileForm.value = nameTitle.textContent;
   inputJobProfileForm.value = jobTitle.textContent;
+
+  enableValidation({
+    formSelector: "form[name='profile-form']",
+    inputSelector: ".form__text",
+    submitButtonSelector: ".form__button",
+    inputErrorClass: "form__text_error",
+    errorClass: "error_open",
+  });
+  
   openPopup(profilePopup);
 };
 

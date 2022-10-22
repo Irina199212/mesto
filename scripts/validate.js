@@ -1,27 +1,53 @@
 const enableValidation = (params) => {
-  console.log(params);
+  const form = document.querySelector(params.formSelector);
+  form.addEventListener("submit", function (evt) {
+    evt.preventDefault();
+  });
+
+  const inputList = Array.from(form.querySelectorAll(params.inputSelector));
+  const buttonSubmit = form.querySelector(params.submitButtonSelector);
+  toggleButtonState(inputList, buttonSubmit);
+
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", function () {
+      checkInputValidity(form, inputElement, params);
+      toggleButtonState(inputList, buttonSubmit);
+    });
+  });
 };
 
-const inputValidateAddCardForm = (inputElement) => {
-  const errorElement = cardForm.querySelector(`#${inputElement.id}-error`);
-  if (inputElement.checkValidity()) {
-    inputElement.classList.remove("form__text_error");
-    errorElement.textContent = "";
-    errorElement.classList.remove("error_open");
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.setAttribute("disabled", true);
   } else {
-    inputElement.classList.add("form__text_error");
-    errorElement.textContent = inputElement.validationMessage;
-    errorElement.classList.add("error_open");
+    buttonElement.removeAttribute("disabled");
   }
 };
 
-const addCardPopupValidate = () => {
-  inputValidateAddCardForm(inputTitleCardForm);
-  inputValidateAddCardForm(inputLinkCardForm);
-
-  if (cardForm.checkValidity()) {
-    buttonSubmitCardForm.removeAttribute("disabled");
+const checkInputValidity = (formElement, inputElement, params) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, params);
   } else {
-    buttonSubmitCardForm.setAttribute("disabled", "true");
+    hideInputError(formElement, inputElement, params);
   }
+};
+
+const showInputError = (formElement, inputElement, params) => {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.add(params.inputErrorClass);
+  errorElement.textContent = inputElement.validationMessage;
+  errorElement.classList.add(params.errorClass);
+};
+
+const hideInputError = (formElement, inputElement, params) => {
+  const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+  inputElement.classList.remove(params.inputErrorClass);
+  errorElement.classList.remove(params.errorClass);
+  errorElement.textContent = "";
 };
