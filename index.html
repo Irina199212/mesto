@@ -56,6 +56,7 @@
               name="name"
               class="form__text form__text_name_name"
               id="profile-name"
+              value="Жак-Ив Кусто"
               minlength="2"
               maxlength="40"
               required
@@ -70,17 +71,14 @@
               class="form__text form__text_name_post"
               id="profile-post"
               placeholder="О себе"
+              value="Исследователь океана"
               minlength="2"
               required
               maxlength="200"
             >
             <span class="error" id="profile-post-error"></span>
           </div>
-          <input
-            type="submit"
-            class="form__button"
-            value="Сохранить"
-          >
+          <input type="submit" class="form__button" value="Сохранить" >
         </form>
       </div>
     </div>
@@ -144,9 +142,7 @@
           type="button"
           aria-label="Кнопка удаления"
         ></button>
-        <a href="./" title="" class="image__link"
-          ><img src="./" class="element__image" alt="..."
-        ></a>
+        <img src="./" class="element__image" alt="..." >
         <div class="element__body">
           <h2 class="element__text">...</h2>
           <button
@@ -160,6 +156,5 @@
     <script src="./scripts/data.js"></script>
     <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
-    
   </body>
 </html>

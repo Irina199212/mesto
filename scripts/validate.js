@@ -1,19 +1,34 @@
 const enableValidation = (params) => {
-  const form = document.querySelector(params.formSelector);
-  form.addEventListener("submit", function (evt) {
+  const formList = Array.from(document.querySelectorAll(params.formSelector));
+  formList.forEach((formElement) => {
+    setEventListeners(formElement, params);
+  });
+};
+
+const setEventListeners = (formElement, params) => {
+  const buttonElement = formElement.querySelector(params.submitButtonSelector);
+  const inputList = Array.from(
+    formElement.querySelectorAll(params.inputSelector)
+  );
+
+  formElement.addEventListener("submit", (evt) => {
     evt.preventDefault();
   });
 
-  const inputList = Array.from(form.querySelectorAll(params.inputSelector));
-  const buttonSubmit = form.querySelector(params.submitButtonSelector);
-  toggleButtonState(inputList, buttonSubmit);
+  formElement.addEventListener("reset", (evt) => {
+    inputList.forEach((inputElement) => {
+        inputElement.value=""
+    })
+    toggleButtonState(inputList, buttonElement);
+  });
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
-      checkInputValidity(form, inputElement, params);
-      toggleButtonState(inputList, buttonSubmit);
+      checkInputValidity(formElement, inputElement, params);
+      toggleButtonState(inputList, buttonElement);
     });
   });
+  toggleButtonState(inputList, buttonElement);
 };
 
 const hasInvalidInput = (inputList) => {
@@ -24,9 +39,9 @@ const hasInvalidInput = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.setAttribute("disabled", true);
+    buttonElement.disabled = true;
   } else {
-    buttonElement.removeAttribute("disabled");
+    buttonElement.disabled = false;
   }
 };
 
