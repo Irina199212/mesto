@@ -3,7 +3,7 @@ const jobTitle = document.querySelector(".profile__subtitle");
 
 const cardsContainer = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#card").content;
-const cardTemplateElement  = cardTemplate.querySelector(".element")
+const cardTemplateElement = cardTemplate.querySelector(".element");
 
 const buttonOpenPopupCard = document.querySelector(".profile__button-add");
 const buttonOpenPopupProfile = document.querySelector(".profile__button-edit");
@@ -13,6 +13,7 @@ const profileForm = profilePopup.querySelector("form[name='profile-form']");
 const buttonClosePopupProfile = profilePopup.querySelector(".popup__close");
 const inputNameProfileForm = profileForm.querySelector(".form__text_name_name");
 const inputJobProfileForm = profileForm.querySelector(".form__text_name_post");
+const buttonSubmitProfileForm = profileForm.querySelector(".form__button");
 
 const cardPopup = document.querySelector(".popup_add-card");
 const cardForm = cardPopup.querySelector("form[name='add-card-form']");
@@ -47,26 +48,9 @@ const handleCloseByOverlay = (evt) => {
 };
 
 const renderInitialCards = () => {
-  cardData.forEach((card) => {
-    cardsContainer.append(createCard(card));
+  cardsDataList.forEach((cardData) => {
+    cardsContainer.append(createCard(cardData));
   });
-};
-
-const initialEvents = () => {
-  buttonOpenPopupCard.addEventListener("click", handleOpenCardPopup);
-  buttonOpenPopupProfile.addEventListener("click", handleOpenProfilePopup);
-
-  cardForm.addEventListener("submit", addCardPopupFormSubmitHandler);
-  profileForm.addEventListener("submit", handleProfileFormSubmit);
-  document.addEventListener("keydown", handleCloseByEsc);
-
-  profilePopup.addEventListener("click", handleCloseByOverlay);
-  cardPopup.addEventListener("click", handleCloseByOverlay);
-  popupImage.addEventListener("click", handleCloseByOverlay);
-
-  buttonClosePopupProfile.addEventListener("click", closePopupProfileHandler);
-  buttonClosePopupCard.addEventListener("click", closePopupCardHandler);
-  buttonClosePopupImage.addEventListener("click", closeImage);
 };
 
 const handleLikeClick = (button) => {
@@ -125,10 +109,21 @@ const handleProfileFormSubmit = (evt) => {
   closePopup(profilePopup);
 };
 
+
+const checkProfileFormValid = ()=>{
+  if(profileForm.checkValidity()){
+    setButtonState(buttonSubmitProfileForm, true);
+  }else{
+    setButtonState(buttonSubmitProfileForm, false);
+  }
+}
+
 const handleOpenProfilePopup = () => {
+  inputNameProfileForm.value = nameTitle.textContent;
+  inputJobProfileForm.value = jobTitle.textContent;
+  checkProfileFormValid()
   openPopup(profilePopup);
 };
-
 
 const closeImage = () => {
   closePopup(popupImage);
@@ -142,7 +137,7 @@ const handlePreviewPicture = (cardData) => {
 };
 
 renderInitialCards();
-initialEvents();
+
 enableValidation({
   formSelector: ".form",
   inputSelector: ".form__text",
@@ -151,3 +146,17 @@ enableValidation({
   errorClass: "error_open",
 });
 
+buttonOpenPopupCard.addEventListener("click", handleOpenCardPopup);
+buttonOpenPopupProfile.addEventListener("click", handleOpenProfilePopup);
+
+cardForm.addEventListener("submit", addCardPopupFormSubmitHandler);
+profileForm.addEventListener("submit", handleProfileFormSubmit);
+document.addEventListener("keydown", handleCloseByEsc);
+
+profilePopup.addEventListener("click", handleCloseByOverlay);
+cardPopup.addEventListener("click", handleCloseByOverlay);
+popupImage.addEventListener("click", handleCloseByOverlay);
+
+buttonClosePopupProfile.addEventListener("click", closePopupProfileHandler);
+buttonClosePopupCard.addEventListener("click", closePopupCardHandler);
+buttonClosePopupImage.addEventListener("click", closeImage);
