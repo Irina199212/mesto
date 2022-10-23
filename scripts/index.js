@@ -109,19 +109,18 @@ const handleProfileFormSubmit = (evt) => {
   closePopup(profilePopup);
 };
 
-
-const checkProfileFormValid = ()=>{
-  if(profileForm.checkValidity()){
+const handleButtonStateProfileForm = () => {
+  if (profileForm.checkValidity()) {
     setButtonState(buttonSubmitProfileForm, true);
-  }else{
+  } else {
     setButtonState(buttonSubmitProfileForm, false);
   }
-}
+};
 
 const handleOpenProfilePopup = () => {
   inputNameProfileForm.value = nameTitle.textContent;
   inputJobProfileForm.value = jobTitle.textContent;
-  checkProfileFormValid()
+  handleButtonStateProfileForm();
   openPopup(profilePopup);
 };
 
