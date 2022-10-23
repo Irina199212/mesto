@@ -26,15 +26,12 @@ const setEventListeners = (formElement, params) => {
     evt.preventDefault();
   });
 
-  formElement.addEventListener("reset", () => {
-    setButtonState(buttonElement, false);
-  });
-
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener("input", function (evt) {
+    inputElement.addEventListener("input", function () {
       checkInputValidity(formElement, inputElement, params);
       toggleButtonState(inputList, buttonElement);
     });
+    
   });
 };
 

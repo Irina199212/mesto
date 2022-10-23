@@ -20,6 +20,8 @@ const cardForm = cardPopup.querySelector("form[name='add-card-form']");
 const buttonClosePopupCard = cardPopup.querySelector(".popup__close");
 const inputTitleCardForm = cardForm.querySelector(".form__text_name_name");
 const inputLinkCardForm = cardForm.querySelector(".form__text_name_link");
+const buttonSubmitCardForm = cardForm.querySelector(".form__button");
+
 
 const popupImage = document.querySelector(".popup_image");
 const buttonClosePopupImage = popupImage.querySelector(".popup__close");
@@ -63,6 +65,9 @@ const handleDeleteCard = (card) => {
 
 const handleOpenCardPopup = () => {
   cardForm.reset();
+  hideInputError(cardForm, inputTitleCardForm, {inputErrorClass: "form__text_error",errorClass: "error_open"});
+  hideInputError(cardForm, inputLinkCardForm, {inputErrorClass: "form__text_error",errorClass: "error_open"});
+  setButtonState(buttonSubmitCardForm, false);
   openPopup(cardPopup);
 };
 
@@ -109,18 +114,13 @@ const handleProfileFormSubmit = (evt) => {
   closePopup(profilePopup);
 };
 
-const handleButtonStateProfileForm = () => {
-  if (profileForm.checkValidity()) {
-    setButtonState(buttonSubmitProfileForm, true);
-  } else {
-    setButtonState(buttonSubmitProfileForm, false);
-  }
-};
 
 const handleOpenProfilePopup = () => {
   inputNameProfileForm.value = nameTitle.textContent;
+  hideInputError(profileForm, inputNameProfileForm, {inputErrorClass: "form__text_error",errorClass: "error_open"});
   inputJobProfileForm.value = jobTitle.textContent;
-  handleButtonStateProfileForm();
+  hideInputError(profileForm, inputJobProfileForm, {inputErrorClass: "form__text_error",errorClass: "error_open"});
+  setButtonState(buttonSubmitProfileForm, true);
   openPopup(profilePopup);
 };
 
