@@ -1,10 +1,8 @@
 const nameTitle = document.querySelector(".profile__title");
 const jobTitle = document.querySelector(".profile__subtitle");
-
 const cardsContainer = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#card").content;
 const cardTemplateElement = cardTemplate.querySelector(".element");
-
 const buttonOpenPopupCard = document.querySelector(".profile__button-add");
 const buttonOpenPopupProfile = document.querySelector(".profile__button-edit");
 
