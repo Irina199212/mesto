@@ -1,9 +1,10 @@
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+
 const nameTitle = document.querySelector(".profile__title");
 const jobTitle = document.querySelector(".profile__subtitle");
 
 const cardsContainer = document.querySelector(".elements");
-const cardTemplate = document.querySelector("#card").content;
-const cardTemplateElement = cardTemplate.querySelector(".element");
 
 const buttonOpenPopupCard = document.querySelector(".profile__button-add");
 const buttonOpenPopupProfile = document.querySelector(".profile__button-edit");
@@ -22,13 +23,10 @@ const inputTitleCardForm = cardForm.querySelector(".form__text_name_name");
 const inputLinkCardForm = cardForm.querySelector(".form__text_name_link");
 const buttonSubmitCardForm = cardForm.querySelector(".form__button");
 
-
 const popupImage = document.querySelector(".popup_image");
 const buttonClosePopupImage = popupImage.querySelector(".popup__close");
-const popupPicture = popupImage.querySelector(".popup__image");
-const popupCaption = popupImage.querySelector(".popup__text");
 
-const openPopup = (popup) => {
+export const openPopup = (popup) => {
   popup.classList.add("popup_opened");
 };
 
@@ -51,23 +49,26 @@ const handleCloseByOverlay = (evt) => {
 
 const renderInitialCards = () => {
   cardsDataList.forEach((cardData) => {
-    cardsContainer.append(createCard(cardData));
+    cardsContainer.append(new Card(cardData, "#card").createCard());
   });
 };
 
-const handleLikeClick = (button) => {
-  button.classList.toggle("element__button_active");
-};
-
-const handleDeleteCard = (card) => {
-  card.remove();
-};
+const validateCardForm = new FormValidator(
+  {
+    inputSelector: ".form__text",
+    submitButtonSelector: ".form__button",
+    inputErrorClass: "form__text_error",
+    errorClass: "error_open",
+  },
+  "form[name='add-card-form']"
+);
+validateCardForm.enableValidation();
 
 const handleOpenCardPopup = () => {
   cardForm.reset();
-  hideInputError(cardForm, inputTitleCardForm, {inputErrorClass: "form__text_error",errorClass: "error_open"});
-  hideInputError(cardForm, inputLinkCardForm, {inputErrorClass: "form__text_error",errorClass: "error_open"});
-  setButtonState(buttonSubmitCardForm, false);
+  validateCardForm._hideInputError(inputTitleCardForm);
+  validateCardForm._hideInputError(inputLinkCardForm);
+  validateCardForm._setButtonState(buttonSubmitCardForm, false);
   openPopup(cardPopup);
 };
 
@@ -82,29 +83,12 @@ const addCardPopupFormSubmitHandler = (evt) => {
     name: inputTitleCardForm.value,
     link: inputLinkCardForm.value,
   };
-  cardsContainer.prepend(createCard(cardData));
+  cardsContainer.prepend(new Card(cardData, "#card").createCard());
   closePopup(cardPopup);
 };
 
 const closePopupProfileHandler = () => {
   closePopup(profilePopup);
-};
-
-const createCard = (cardData) => {
-  const cardElement = cardTemplateElement.cloneNode(true);
-  const likeButton = cardElement.querySelector(".element__button");
-  const deleteButton = cardElement.querySelector(".element__delete");
-
-  const cardImage = cardElement.querySelector(".element__image");
-  cardImage.src = cardData.link;
-  cardImage.alt = cardData.name;
-  cardElement.querySelector(".element__text").textContent = cardData.name;
-
-  likeButton.addEventListener("click", () => handleLikeClick(likeButton));
-  deleteButton.addEventListener("click", () => handleDeleteCard(cardElement));
-  cardImage.addEventListener("click", () => handlePreviewPicture(cardData));
-
-  return cardElement;
 };
 
 const handleProfileFormSubmit = (evt) => {
@@ -114,13 +98,23 @@ const handleProfileFormSubmit = (evt) => {
   closePopup(profilePopup);
 };
 
+const validateProfileForm = new FormValidator(
+  {
+    inputSelector: ".form__text",
+    submitButtonSelector: ".form__button",
+    inputErrorClass: "form__text_error",
+    errorClass: "error_open",
+  },
+  "form[name='profile-form']"
+);
+validateProfileForm.enableValidation();
 
 const handleOpenProfilePopup = () => {
   inputNameProfileForm.value = nameTitle.textContent;
-  hideInputError(profileForm, inputNameProfileForm, {inputErrorClass: "form__text_error",errorClass: "error_open"});
   inputJobProfileForm.value = jobTitle.textContent;
-  hideInputError(profileForm, inputJobProfileForm, {inputErrorClass: "form__text_error",errorClass: "error_open"});
-  setButtonState(buttonSubmitProfileForm, true);
+  validateProfileForm._hideInputError(inputNameProfileForm);
+  validateProfileForm._hideInputError(inputJobProfileForm);
+  validateProfileForm._setButtonState(buttonSubmitProfileForm, true);
   openPopup(profilePopup);
 };
 
@@ -128,22 +122,7 @@ const closeImage = () => {
   closePopup(popupImage);
 };
 
-const handlePreviewPicture = (cardData) => {
-  popupPicture.src = cardData.link;
-  popupPicture.alt = cardData.name;
-  popupCaption.textContent = cardData.name;
-  openPopup(popupImage);
-};
-
 renderInitialCards();
-
-enableValidation({
-  formSelector: ".form",
-  inputSelector: ".form__text",
-  submitButtonSelector: ".form__button",
-  inputErrorClass: "form__text_error",
-  errorClass: "error_open",
-});
 
 buttonOpenPopupCard.addEventListener("click", handleOpenCardPopup);
 buttonOpenPopupProfile.addEventListener("click", handleOpenProfilePopup);
