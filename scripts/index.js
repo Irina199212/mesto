@@ -3,7 +3,6 @@ import FormValidator from "./FormValidator.js";
 
 const nameTitle = document.querySelector(".profile__title");
 const jobTitle = document.querySelector(".profile__subtitle");
-
 const cardsContainer = document.querySelector(".elements");
 
 const buttonOpenPopupCard = document.querySelector(".profile__button-add");
