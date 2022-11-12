@@ -1,21 +1,19 @@
-import { openPopup } from "./index.js";
 export default class Card {
-  constructor(param, templateSelector) {
+  constructor(param, templateSelector, handleCardClick) {
     this._name = param.name;
     this._link = param.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
   _setEventListeners() {
-    this._element
-      .querySelector(".element__button")
-      .addEventListener("click", () => this._handleLikeClick());
+    this._likeButton.addEventListener("click", () => this._handleLikeClick());
 
-    this._element
-      .querySelector(".element__delete")
-      .addEventListener("click", () => this._handleDeleteCard());
-    this._element
-      .querySelector(".element__image")
-      .addEventListener("click", () => this._handlePreviewPicture());
+    this._deleteButton.addEventListener("click", () =>
+      this._handleDeleteCard()
+    );
+    this._cardImage.addEventListener("click", () =>
+      this._handleCardClick(this._name, this._link)
+    );
   }
 
   _getTemplate() {
@@ -27,32 +25,25 @@ export default class Card {
   }
 
   _handleLikeClick = () => {
-    this._element
-      .querySelector(".element__button")
-      .classList.toggle("element__button_active");
+    this._likeButton.classList.toggle("element__button_active");
   };
 
   _handleDeleteCard = () => {
     this._element.remove();
   };
 
-  _handlePreviewPicture = () => {
-    const popupImage = document.querySelector(".popup_image");
-    const popupPicture = popupImage.querySelector(".popup__image");
-    const popupCaption = popupImage.querySelector(".popup__text");
-    popupPicture.src = this._link;
-    popupPicture.alt = this._name;
-    popupCaption.textContent = this._name;
-    openPopup(popupImage);
-  };
-
   createCard() {
     this._element = this._getTemplate();
+    this._cardImage = this._element.querySelector(".element__image");
+    this._cardText = this._element.querySelector(".element__text");
+    this._likeButton = this._element.querySelector(".element__button");
+    this._deleteButton = this._element.querySelector(".element__delete");
+
     this._setEventListeners();
 
-    this._element.querySelector(".element__image").src = this._link;
-    this._element.querySelector(".element__image").alt = this._name;
-    this._element.querySelector(".element__text").textContent = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._cardText.textContent = this._name;
 
     return this._element;
   }
