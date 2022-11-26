@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Проект: Место</title>
+</head>
+
+<body class="body">
+  <div class="page">
+    <header class="header">
+      <a href="./"><img src="<%=require('./images/logo.svg')%>" class="logo" alt="Место логотип"></a>
+    </header>
+    <main class="main">
+      <section class="profile">
+        <img src="<%=require('./images/Avatar.png')%>" class="profile__avatar" alt="Фото">
+        <div class="profile__info">
+          <div class="profile__block">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <button class="profile__button-edit" type="button" aria-label="Кнопка редактирования профиля"></button>
+          </div>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button class="profile__button-add" type="button" aria-label="Кнопка добавления"></button>
+      </section>
+      <section class="elements" aria-label="Фото мест"></section>
+    </main>
+    <footer class="footer">
+      <p class="footer__text">&copy;2020 Mesto Russia</p>
+    </footer>
+  </div>
+
+  <div class="popup popup_profile-form">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="Кнопка закрытия попапа редактировния профиля"></button>
+      <form class="form" action="./" method="post" name="profile-form">
+        <h3 class="form__title">Редактировать профиль</h3>
+        <div class="form__row">
+          <input type="text" name="name" class="form__text form__text_name_name" id="profile-name" minlength="2"
+            maxlength="40" required placeholder="Имя">
+          <span class="error" id="profile-name-error"></span>
+        </div>
+        <div class="form__row">
+          <input type="text" name="post" class="form__text form__text_name_post" id="profile-post" placeholder="О себе"
+            minlength="2" required maxlength="200">
+          <span class="error" id="profile-post-error"></span>
+        </div>
+        <input type="submit" class="form__button" value="Сохранить">
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_add-card">
+    <div class="popup__container">
+      <button class="popup__close" type="button" aria-label="Кнопка закрытия попапа добавления карточки"></button>
+      <form class="form" action="./" method="post" name="add-card-form">
+        <h3 class="form__title">Новое место</h3>
+        <div class="form__row">
+          <input type="text" name="name" minlength="2" maxlength="30" class="form__text form__text_name_name"
+            id="card-name" required placeholder="Название">
+          <span class="error" id="card-name-error"></span>
+        </div>
+        <div class="form__row">
+          <input type="url" name="link" required class="form__text form__text_name_link" id="card-link"
+            placeholder="Ссылка на картинку">
+          <span class="error" id="card-link-error"></span>
+        </div>
+        <input type="submit" class="form__button" value="Сохранить">
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_image">
+    <div class="popup__container popup__container_image">
+      <button class="popup__close" type="button" aria-label="Кнопка закрытия картинки"></button>
+      <figure class="popup__figure">
+        <img src="./" class="popup__image" alt="...">
+        <figcaption class="popup__text">...</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <template id="card">
+    <article class="element">
+      <button class="element__delete" type="button" aria-label="Кнопка удаления"></button>
+      <img src="./" class="element__image" alt="...">
+      <div class="element__body">
+        <h2 class="element__text">...</h2>
+        <button class="element__button" type="button" aria-label="Кнопка лайка"></button>
+      </div>
+    </article>
+  </template>
+</body>
+
+</html>

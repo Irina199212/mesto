@@ -1,5 +1,7 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
+import "./index.css";
+import { cardsDataList } from "../components/data.js";
+import Card from "../components/Card";
+import FormValidator from "../components/FormValidator.js";
 
 const formData = {
   inputSelector: ".form__text",
@@ -29,8 +31,7 @@ const popupImage = document.querySelector(".popup_image");
 const popupPicture = popupImage.querySelector(".popup__image");
 const popupCaption = popupImage.querySelector(".popup__text");
 
-
-const popups = document.querySelectorAll('.popup')
+const popups = document.querySelectorAll(".popup");
 
 const openPopup = (popup) => {
   document.addEventListener("keydown", handleCloseByEsc);
@@ -62,10 +63,7 @@ const renderInitialCards = () => {
   });
 };
 
-const validateCardForm = new FormValidator(
-  formData,
-  cardForm
-);
+const validateCardForm = new FormValidator(formData, cardForm);
 validateCardForm.enableValidation();
 
 const handleOpenCardPopup = () => {
@@ -97,10 +95,7 @@ const handleProfileFormSubmit = (evt) => {
   closePopup(profilePopup);
 };
 
-const validateProfileForm = new FormValidator(
-  formData,
-  profileForm
-);
+const validateProfileForm = new FormValidator(formData, profileForm);
 validateProfileForm.enableValidation();
 
 const handleOpenProfilePopup = () => {
@@ -119,12 +114,12 @@ cardForm.addEventListener("submit", addCardPopupFormSubmitHandler);
 profileForm.addEventListener("submit", handleProfileFormSubmit);
 
 popups.forEach((popup) => {
-  popup.addEventListener('mousedown', (evt) => {
-      if (evt.target.classList.contains('popup_opened')) {
-          closePopup(popup)
-      }
-      if (evt.target.classList.contains('popup__close')) {
-        closePopup(popup)
-      }
-  })
-})
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup_opened")) {
+      closePopup(popup);
+    }
+    if (evt.target.classList.contains("popup__close")) {
+      closePopup(popup);
+    }
+  });
+});
