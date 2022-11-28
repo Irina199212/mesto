@@ -1,5 +1,5 @@
 import "./index.css";
-import { cardsDataList } from "../components/data.js";
+import { cardsDataList } from "../utils/data.js";
 import PopupWithImage from "../components/PopupWithImage";
 import Section from "../components/Section";
 import UserInfo from "../components/UserInfo";
@@ -29,9 +29,10 @@ validateCardForm.enableValidation();
 const validateProfileForm = new FormValidator(formData, profileForm);
 validateProfileForm.enableValidation();
 
+const popupCardImage = new PopupWithImage(".popup_image");
+popupCardImage.setEventListeners();
+
 function handleCardClick(name, link) {
-  const popupCardImage = new PopupWithImage(".popup_image");
-  popupCardImage.setEventListeners();
   popupCardImage.open(name, link);
 }
 

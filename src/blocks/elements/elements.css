@@ -2,5 +2,12 @@
   display: grid;
   column-gap: 17px;
   row-gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  grid-template-columns: repeat(auto-fit, 282px);
+}
+
+
+@media screen and (max-width: 918px) {
+  .elements {
+    grid-template-columns: repeat(auto-fit, 100%);
+  }
 }
