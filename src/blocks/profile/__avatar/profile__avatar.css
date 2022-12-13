@@ -2,6 +2,24 @@
   max-width: 120px;
   max-height: 120px;
   border-radius: 50%;
-  object-fit: contain;
-  object-position: center;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile__avatar:hover {
+  cursor: pointer;
+}
+
+.profile__avatar:hover::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8) url('../../../images/updateAvatar.svg') no-repeat center center;
 }
