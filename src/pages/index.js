@@ -1,5 +1,4 @@
 import "./index.css";
-//import { cardsDataList } from "../utils/data.js";
 import PopupWithImage from "../components/PopupWithImage";
 import Section from "../components/Section";
 import UserInfo from "../components/UserInfo";
@@ -36,8 +35,6 @@ const inputLinkAvatarForm = avatarForm.querySelector(".form__text_name_link");
 const submitButtonAvatarForm = avatarForm.querySelector(
   formData.submitButtonSelector
 );
-
-const cardRemoveForm = document.forms["profile-card-remove"];
 
 const buttonOpenPopupProfile = document.querySelector(".profile__button-edit");
 const profileForm = document.forms["profile-form"];
