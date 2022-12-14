@@ -5,7 +5,6 @@ export default class PopupWithConfirmation extends Popup {
     super(selector);
     this._callbackSubmit = callback;
     this._formElement = this._popupElement.querySelector("form");
-    this._inputList = Array.from(this._formElement.querySelectorAll("input"));
   }
   open(id) {
     this._id = id

@@ -13,8 +13,6 @@ const formData = {
   submitButtonSelector: ".form__button",
   inputErrorClass: "form__text_error",
   errorClass: "error_open",
-  submitText: "Сохранить",
-  submitingText: "Сохранение...",
 };
 
 const api = new Api({
@@ -31,10 +29,6 @@ const buttonOpenPopupCard = document.querySelector(".profile__button-add");
 
 const buttonOpenPopupAvatar = document.querySelector(".profile__avatar");
 const avatarForm = document.forms["profile-avatar-form"];
-const inputLinkAvatarForm = avatarForm.querySelector(".form__text_name_link");
-const submitButtonAvatarForm = avatarForm.querySelector(
-  formData.submitButtonSelector
-);
 
 const buttonOpenPopupProfile = document.querySelector(".profile__button-edit");
 const profileForm = document.forms["profile-form"];
@@ -42,13 +36,6 @@ const inputNameProfileForm = profileForm.querySelector(".form__text_name_name");
 const inputJobProfileForm = profileForm.querySelector(".form__text_name_post");
 
 const cardForm = document.forms["add-card-form"];
-
-const submitButtonProfileForm = profileForm.querySelector(
-  formData.submitButtonSelector
-);
-const submitButtonCardForm = cardForm.querySelector(
-  formData.submitButtonSelector
-);
 
 const validateCardForm = new FormValidator(formData, cardForm);
 validateCardForm.enableValidation();
@@ -89,45 +76,51 @@ function createCard(cardData) {
 }
 
 const addCardPopupFormSubmitHandler = (cardData) => {
-  submitButtonCardForm.value = formData.submitingText;
+  cardPopup.setLoader(true);
   api
     .addCard(cardData)
     .then((res) => {
       render.addItem(createCard(res));
-      submitButtonCardForm.value = formData.submitText;
+      cardPopup.close();
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      cardPopup.setLoader(false);
     });
-  cardPopup.close();
 };
 
 const handleProfileFormSubmit = (userData) => {
-  submitButtonProfileForm.value = formData.submitingText;
+  profilePopup.setLoader(true);
   api
     .updateUserInfo(userData)
     .then((res) => {
       userInfo.setUserInfo(res);
-      submitButtonProfileForm.value = formData.submitText;
+      profilePopup.close();
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      profilePopup.setLoader(false);
     });
-  profilePopup.close();
 };
 
 const avatarPopupFormSubmitHandler = (userData) => {
-  submitButtonAvatarForm.value = formData.submitingText;
+  avatarPopup.setLoader(true);
   api
     .updateUserAvatar(userData)
     .then((res) => {
       userInfo.setUserInfo(res);
-      submitButtonAvatarForm.value = formData.submitText;
+      avatarPopup.close();
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      avatarPopup.setLoader(false);
     });
-  avatarPopup.close();
 };
 
 const cardPopup = new PopupWithForm(
@@ -148,11 +141,11 @@ const cardRemovePopup = new PopupWithConfirmation(
 );
 cardRemovePopup.setEventListeners();
 
-function handleCardRemoveFormSubmit(id) {
+function handleCardRemoveFormSubmit(card) {
   api
-    .removeCard(id)
+    .removeCard(card._id)
     .then(() => {
-      document.querySelector(`#card-${id}`).remove();
+      card.handleDeleteCard();
       cardRemovePopup.close();
     })
     .catch((err) => {
@@ -160,24 +153,24 @@ function handleCardRemoveFormSubmit(id) {
     });
 }
 
-function handleSetLikeCard(id, likeButton, likeCounter) {
+function handleSetLikeCard(card) {
   api
-    .setLikeCard(id)
+    .setLikeCard(card._id)
     .then((res) => {
-      likeCounter.textContent = res.likes.length;
-      likeButton.classList.add("element__button_active");
+      card.setLikesButtonFlag(true);
+      card.setLikesCounter(res.likes);
     })
     .catch((err) => {
       console.log(err);
     });
 }
 
-function handleRemoveLikeCard(id, likeButton, likeCounter) {
+function handleRemoveLikeCard(card) {
   api
-    .removeLikeCard(id)
+    .removeLikeCard(card._id)
     .then((res) => {
-      likeCounter.textContent = res.likes.length;
-      likeButton.classList.remove("element__button_active");
+      card.setLikesButtonFlag(false);
+      card.setLikesCounter(res.likes);
     })
     .catch((err) => {
       console.log(err);
@@ -191,8 +184,6 @@ const avatarPopup = new PopupWithForm(
 avatarPopup.setEventListeners();
 
 const handleOpenAvatarPopup = () => {
-  const userData = userInfo.getUserInfo();
-  inputLinkAvatarForm.value = userData.avatar;
   validateAvatarForm.resetValidation();
   avatarPopup.open();
 };
@@ -217,18 +208,11 @@ const render = new Section(
   },
   ".elements"
 );
-api
-  .getUserInfo()
-  .then((res) => {
-    userInfo.setUserInfo(res);
-    api
-      .getInitialCards()
-      .then((res) => {
-        render.renderer(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([info, initialCards]) => {
+    userInfo.setUserInfo(info);
+    render.renderer(initialCards);
   })
   .catch((err) => {
     console.log(err);
@@ -236,5 +220,4 @@ api
 
 buttonOpenPopupCard.addEventListener("click", handleOpenCardPopup);
 buttonOpenPopupProfile.addEventListener("click", handleOpenProfilePopup);
-
 buttonOpenPopupAvatar.addEventListener("click", handleOpenAvatarPopup);

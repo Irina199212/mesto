@@ -5,7 +5,18 @@ export default class PopupWithForm extends Popup {
     super(selector);
     this._callbackSubmit = callback;
     this._formElement = this._popupElement.querySelector("form");
+    this._formElementSubmit = this._formElement.querySelector(
+      "input[type='submit']"
+    );
     this._inputList = Array.from(this._formElement.querySelectorAll("input"));
+  }
+
+  setLoader(flag) {
+    if (flag) {
+      this._formElementSubmit.value = "Сохранение...";
+    } else {
+      this._formElementSubmit.value = "Сохранить";
+    }
   }
 
   close() {
